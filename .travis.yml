@@ -13,8 +13,13 @@ addons:
   firefox: latest
 # command to install dependencies
 install:
+  - pip3 install virtualenv
+  - virtualenv venv
+  - source venv/bin/activate
   - pip3 install -r requirements.txt
   - pip3 install pylint codecov coverage
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
+  - tar -xzf geckodriver-v0.26.0-linux64.tar.gz -C venv/bin
 # command to run tests
 script:
   - coverage run -m unittest test_*.py
